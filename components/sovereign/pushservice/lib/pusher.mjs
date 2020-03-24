@@ -9,13 +9,10 @@ import webPush      from '/web-push';
 class Pusher {
 
     constructor() {
+        this.init();
     }
 
-    install() {}
-
-    resolve() {}
-
-    start() {
+    init() {
         webPush.setVapidDetails(
             universe.VAPID.subject,
             universe.VAPID.publicKey,
@@ -24,13 +21,13 @@ class Pusher {
         // setup subscription routes
     }
 
-    stop() {
-        // remove subscription routes
+    /*
+     * Push
+     */
+
+    push(topic, message) {
+        universe.logger.info('--> push', topic, message);
     }
-
-    update() {}
-
-    uninstall() {}
 }
 
 export default new Pusher();
