@@ -36,6 +36,7 @@ const responsibility    = 'thoregon.heliots';
     ;
 
     const boundctx = await ctxbuilder.build();
+
     universe.logger.info(`Bounded Context: ${ctx} -> ${entityName}`);
 })();
 
