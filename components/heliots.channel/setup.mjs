@@ -9,10 +9,10 @@ import SchemaBuilder, { ID, CHILD, REL, INT, REAL, BOOL, STRING, DATE, DATETIME,
 
 const bg                = ref => `thoregon.heliots.${ref}`;    // shortcut and DRY
 
-const ctx               = 'thoregon.heliots.service';
+const ctx               = 'heliots.service';
 const entityName        = 'Channel';
 const entity            = bg(entityName);
-const responsibility    = 'thoregon.heliots';
+const heliotsservice    = 'heliots.service';
 
 (async () => {
     const sbuilder = new SchemaBuilder();
@@ -30,7 +30,7 @@ const responsibility    = 'thoregon.heliots';
 
     ctxbuilder.use(ctx)
         .addSchema(entity)
-        .addDefaults()
+        .addDefaults(heliotsservice)
         .collection(bg('channels'))
         .release('2020-01-09.1')
     ;
