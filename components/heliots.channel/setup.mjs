@@ -31,7 +31,7 @@ const heliotsservice    = 'heliots.service';
     ctxbuilder.use(ctx)
         .addSchema(entity)
         .addDefaults(heliotsservice)
-        .collection(bg('channels'))
+        .collection('channels')
         .release('2020-01-09.1')
     ;
 

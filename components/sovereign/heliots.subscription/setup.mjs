@@ -31,7 +31,7 @@ const heliotsservice    = 'heliots.service';
         .addAttribute({ name: 'channel',            type: STRING, index: true })
         .addAttribute({ name: 'expirationTime ',    type: DATETIME })
         .addAttribute({ name: 'keys',               type: CHILD(ns('SubscriptionKeys')) })
-        .key('subscription.endpoint', 'channel');
+        .key('endpoint', 'channel');
     ;
 
     const entity = await sbuilder.build();
@@ -41,7 +41,7 @@ const heliotsservice    = 'heliots.service';
     ctxbuilder.use(ctx)
         .addSchema(entity)
         .addDefaults(heliotsservice)
-        .collection(ns('subscriptions'))
+        .collection('subscriptions', 'context')
         .release('2020-02-24.1')
     ;
 
