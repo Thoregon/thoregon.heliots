@@ -25,9 +25,23 @@ class Pusher {
      * Push
      */
 
-    push(topic, message) {
-        universe.logger.info('--> push', topic, message);
+    push(channel, message, subject) {
+        universe.logger.info('--> push', channel, message);
+
     }
+
+    /*
+     * service implementation
+     */
+
+    install() {}
+    uninstall() {}
+    resolve() {}
+    start() {
+        // todo: prepare 'subscriptions' for 'channels'
+    }
+    stop() {}
+    update() {}
 }
 
 export default new Pusher();

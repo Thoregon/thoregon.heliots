@@ -5,11 +5,10 @@
  */
 
 import Action           from "/thoregon.tru4D/lib/action/action.mjs";
-import webpush          from "/web-push";
 
 export default class PushMessageAction extends Action {
 
-    exec(command, payload, control) {
+    exec(command, payload, control, bc) {
         let {
             channel,
             subject,
