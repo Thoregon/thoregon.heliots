@@ -15,13 +15,26 @@ const entity            = bg(entityName);
 const heliotsservice    = 'heliots.service';
 
 (async () => {
-    const sbuilder = new SchemaBuilder();
+    let sbuilder = new SchemaBuilder();
 
+    sbuilder.name('Message')
+        .ref(bg('Message'))
+        .addAttribute({ name: 'alias',          type: STRING, index: true })
+        .addAttribute({ name: 'thumbnail',      type: IMAGE })
+        .addAttribute({ name: 'content',        type: STRING })
+    ;
+
+    const msgentity = await sbuilder.build();
+
+    // todo: Member Schema? -> defined by observers like heliots? -> Events!
+
+    sbuilder = new SchemaBuilder();
     sbuilder.name(entityName)
         .ref(bg(entityName))
         .addAttribute({ name: 'name',           type: STRING, index: true })
         .addAttribute({ name: 'description',    type: STRING })
         .addAttribute({ name: 'thumbnail',      type: IMAGE })
+        .addAttribute({ name: 'messages',       type: LIST(REL(bg('Message'))) })
     ;
 
     const entity = await sbuilder.build();
@@ -31,8 +44,8 @@ const heliotsservice    = 'heliots.service';
     ctxbuilder.use(ctx)
         .addSchema(entity)
         .addDefaults(heliotsservice)
-        .collection('channels')
-        .release('2020-01-09.1')
+        .collection('channels', 'shared')
+        .release('2020-05-01.1')
     ;
 
     const boundctx = await ctxbuilder.build();
