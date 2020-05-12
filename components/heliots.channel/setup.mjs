@@ -4,14 +4,12 @@
  * @author: Bernhard Lukassen
  */
 
-import BoundedContextBuilder from '/thoregon.tru4D';
+import BoundedContextBuilder        from '/thoregon.tru4D';
 import SchemaBuilder, { ID, CHILD, REL, INT, REAL, BOOL, STRING, DATE, DATETIME, DURATION, IMAGE, LIST, MAP, SET } from '/evolux.schema';
 
 const bg                = ref => `thoregon.heliots.${ref}`;    // shortcut and DRY
 
 const ctx               = 'heliots.service';
-const entityName        = 'Channel';
-const entity            = bg(entityName);
 const heliotsservice    = 'heliots.service';
 
 (async () => {
@@ -24,33 +22,34 @@ const heliotsservice    = 'heliots.service';
         .addAttribute({ name: 'content',        type: STRING })
     ;
 
-    const msgentity = await sbuilder.build();
+    const message = await sbuilder.build();
 
     // todo: Member Schema? -> defined by observers like heliots? -> Events!
 
     sbuilder = new SchemaBuilder();
-    sbuilder.name(entityName)
-        .ref(bg(entityName))
+    sbuilder.name('Channel')
+        .ref(bg('Channel'))
         .addAttribute({ name: 'name',           type: STRING, index: true })
         .addAttribute({ name: 'description',    type: STRING })
         .addAttribute({ name: 'thumbnail',      type: IMAGE })
         .addAttribute({ name: 'messages',       type: LIST(REL(bg('Message'))) })
     ;
 
-    const entity = await sbuilder.build();
+    const channel = await sbuilder.build();
 
     const ctxbuilder = new BoundedContextBuilder();
 
     ctxbuilder.use(ctx)
-        .addSchema(entity)
+        .addSchema(channel)
         .addDefaults(heliotsservice)
         .collection('channels', 'shared')
+        .addSchema(message)
         .release('2020-05-01.1')
     ;
 
     const boundctx = await ctxbuilder.build();
 
-    universe.logger.info(`Bounded Context: ${ctx} -> ${entityName}`);
+    universe.logger.info(`Bounded Context: ${ctx} -> Channel, Message`);
 })();
 
-export default { ctx, entity };
+export default { ctx };

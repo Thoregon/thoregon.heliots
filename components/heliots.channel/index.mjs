@@ -5,4 +5,5 @@
  */
 
 export { default as tru4Dctx }                from './setup.mjs';
+export default {};
 
