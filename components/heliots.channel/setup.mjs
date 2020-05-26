@@ -33,6 +33,7 @@ const heliotsservice    = 'heliots.service';
         .addAttribute({ name: 'description',    type: STRING })
         .addAttribute({ name: 'thumbnail',      type: IMAGE })
         .addAttribute({ name: 'messages',       type: LIST(REL(bg('Message'))) })
+        .key('name');
     ;
 
     const channel = await sbuilder.build();
