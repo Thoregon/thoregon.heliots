@@ -7,7 +7,7 @@
 import HeliotsTerminal              from "./lib/heliots.mjs";
 import components                   from './@components';
 
-import heliots                      from "./lib/messager/setup.mjs";
+// import heliots                      from "./lib/messager/setup.mjs";
 
 export *                            from './lib/consumer/subscriptionmain.mjs';
 
